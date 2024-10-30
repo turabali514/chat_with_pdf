@@ -9,6 +9,10 @@ from langchain_community.vectorstores import Chroma
 import streamlit as st
 import os
 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 # Load and process document
 file_name = "ChangeYourBrainEveryDay"
 file_extension = "pdf"

@@ -12,7 +12,7 @@ import os
 # Load and process document
 file_name = "ChangeYourBrainEveryDay"
 file_extension = "pdf"
-file_path = "ChatbotDemo/data/"+file_name+"."+file_extension
+file_path = "data/"+file_name+"."+file_extension
 loader = PyPDFLoader(file_path)
 docs = loader.load()
 
@@ -23,7 +23,7 @@ splits = text_splitter.split_documents(docs)
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key=os.environ["OPENAI_KEY"])
 
 # Connect or create a Chroma instance for persistent embeddings
-chroma_db = Chroma(persist_directory="ChatbotDemo/data", collection_name=file_name, embedding_function=embeddings)
+chroma_db = Chroma(persist_directory="data", collection_name=file_name, embedding_function=embeddings)
 
 retriever = chroma_db.as_retriever()
 
@@ -36,7 +36,7 @@ if len(collection['ids']) == 0:
     chroma_db = Chroma.from_documents(
         documents=docs, 
         embedding=embeddings, 
-        persist_directory="ChatbotDemo/data",
+        persist_directory="data",
         collection_name=file_name
     )
 
